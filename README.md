@@ -1,7 +1,5 @@
 # BODAOTO
 
-https://jitpack.io/private#dirceubelem/bodaoto/1.1
-
 [![](https://www.jitpack.io/v/dirceubelem/bodaoto.svg)](https://www.jitpack.io/#dirceubelem/bodaoto)
 
 Framework para trabalhar classes DAO e TO de forma simples e eficiente.
@@ -155,7 +153,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.dirceubelem:bodaoto:1.2'
+    implementation 'com.github.dirceubelem:bodaoto:1.3'
 }
 ```
 
