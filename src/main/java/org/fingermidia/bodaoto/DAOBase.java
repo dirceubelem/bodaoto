@@ -4,8 +4,6 @@
  */
 package org.fingermidia.bodaoto;
 
-import clubeoba.fw.Data;
-import clubeoba.fw.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,7 +20,7 @@ import java.util.List;
  */
 public class DAOBase {
 
-    public void insert(Connection c, clubeoba.dao.fw.TOBase t) throws SQLException, Exception {
+    public int insert(Connection c, TOBase t) throws SQLException, Exception {
 
         boolean temAnterior = false;
 
@@ -57,11 +55,10 @@ public class DAOBase {
 
         sql.append(parm);
 
-        //System.out.println(sql.toString());
-        Data.executeUpdate(c, sql.toString(), valores);
+        return Data.executeUpdate(c, sql.toString(), valores);
     }
 
-    public void update(Connection c, clubeoba.dao.fw.TOBase t) throws SQLException, Exception {
+    public int update(Connection c, TOBase t) throws Exception {
 
         boolean temAnterior = false;
 
@@ -108,11 +105,10 @@ public class DAOBase {
             }
         }
 
-        //System.out.println(sql.toString());
-        Data.executeUpdate(c, sql.toString(), valores);
+        return Data.executeUpdate(c, sql.toString(), valores);
     }
 
-    public int delete(Connection c, clubeoba.dao.fw.TOBase t) throws SQLException, Exception {
+    public int delete(Connection c, TOBase t) throws Exception {
 
         boolean temAnterior = false;
 
@@ -140,7 +136,6 @@ public class DAOBase {
             }
         }
 
-        //System.out.println(sql.toString());
         return Data.executeUpdate(c, sql.toString(), valores);
     }
 
@@ -171,7 +166,7 @@ public class DAOBase {
         return j;
     }
 
-    public JSONArray list(Connection c, clubeoba.dao.fw.TOBase t) throws Exception {
+    public JSONArray list(Connection c, TOBase t) throws Exception {
 
         boolean temAnterior = false;
         List<Object> valores = new ArrayList<>();
@@ -212,7 +207,6 @@ public class DAOBase {
             sql.append(" 1 ");
         }
 
-        //System.out.println(sql.toString());
         JSONArray ja = new JSONArray();
 
         try (ResultSet rs = Data.executeQuery(c, sql.toString(), valores)) {
@@ -228,7 +222,7 @@ public class DAOBase {
         return ja;
     }
 
-    public JSONObject list(Connection c, clubeoba.dao.fw.TOBase t, String busca, int reg, int pag) throws Exception {
+    public JSONObject list(Connection c, TOBase t, String busca, int reg, int pag) throws Exception {
         JSONObject jo = new JSONObject();
 
         boolean temAnterior = false;
@@ -309,7 +303,7 @@ public class DAOBase {
         return jo;
     }
 
-    public int total(Connection c, clubeoba.dao.fw.TOBase t, String busca) throws Exception {
+    public int total(Connection c, TOBase t, String busca) throws Exception {
 
         List<Field> colunasBusca = Helper.obterColunasBusca(t);
 
@@ -346,7 +340,7 @@ public class DAOBase {
         }
     }
 
-    public clubeoba.dao.fw.TOBase get(Connection c, clubeoba.dao.fw.TOBase t) throws Exception {
+    public TOBase get(Connection c, TOBase t) throws Exception {
 
         boolean temAnterior = false;
 
@@ -393,18 +387,12 @@ public class DAOBase {
             if (rs.next()) {
 
                 for (Field f : colunas) {
-
-                    // if (f.getAnnotation(Coluna.class).visivelJSON()) {
                     String coluna = f.getAnnotation(Column.class).name();
                     Helper.runSetter(coluna, t, rs.getObject(coluna));
-                    // }
-
                 }
 
                 return t;
-
             }
-
         }
 
         return null;

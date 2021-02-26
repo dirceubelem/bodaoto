@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.util.List;
 
-@clubeoba.dao.fw.Table(name = "base")
+@Table(name = "base")
 public class TOBase {
 
     public JSONObject getJson() throws Exception {

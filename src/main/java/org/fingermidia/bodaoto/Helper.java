@@ -5,7 +5,6 @@
  */
 package org.fingermidia.bodaoto;
 
-import clubeoba.fw.DateTime;
 import org.json.JSONObject;
 
 import java.lang.annotation.Annotation;
@@ -16,12 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author dirceubelem
  */
 public class Helper {
 
-    public static JSONObject createJSON(clubeoba.dao.fw.TOBase t) throws Exception {
+    public static JSONObject createJSON(TOBase t) throws Exception {
 
         JSONObject j = new JSONObject();
 
@@ -57,7 +55,7 @@ public class Helper {
 
     }
 
-    public static Object runGetter(Field field, clubeoba.dao.fw.TOBase o) throws Exception {
+    public static Object runGetter(Field field, TOBase o) throws Exception {
 
         for (Method method : o.getClass().getMethods()) {
 
@@ -74,7 +72,7 @@ public class Helper {
         return null;
     }
 
-    public static Object runSetter(String name, clubeoba.dao.fw.TOBase o, Object v) throws Exception {
+    public static Object runSetter(String name, TOBase o, Object v) throws Exception {
 
         for (Method method : o.getClass().getMethods()) {
 
@@ -90,13 +88,13 @@ public class Helper {
         return null;
     }
 
-    public static String obterNomeTabela(clubeoba.dao.fw.TOBase t) {
+    public static String obterNomeTabela(TOBase t) {
 
         Class<?> obj = (Class<?>) t.getClass();
 
-        if (obj.isAnnotationPresent(clubeoba.dao.fw.Table.class)) {
-            Annotation annotation = obj.getAnnotation(clubeoba.dao.fw.Table.class);
-            clubeoba.dao.fw.Table tabela = (clubeoba.dao.fw.Table) annotation;
+        if (obj.isAnnotationPresent(Table.class)) {
+            Annotation annotation = obj.getAnnotation(Table.class);
+            Table tabela = (Table) annotation;
             return tabela.name();
         } else {
             return null;
@@ -104,7 +102,7 @@ public class Helper {
 
     }
 
-    public static List<Field> obterColunas(clubeoba.dao.fw.TOBase t) throws Exception {
+    public static List<Field> obterColunas(TOBase t) throws Exception {
 
         List<Field> l = new ArrayList<>();
 
@@ -119,7 +117,7 @@ public class Helper {
         return l;
     }
 
-    public static String obterColunasString(clubeoba.dao.fw.TOBase t) throws Exception {
+    public static String obterColunasString(TOBase t) throws Exception {
 
         StringBuilder ret = new StringBuilder();
 
@@ -138,7 +136,7 @@ public class Helper {
         return ret.toString();
     }
 
-    public static String obterColunasString(clubeoba.dao.fw.TOBase t, String alias) throws Exception {
+    public static String obterColunasString(TOBase t, String alias) throws Exception {
 
         StringBuilder ret = new StringBuilder();
 
@@ -157,7 +155,7 @@ public class Helper {
         return ret.toString();
     }
 
-    public static String obterColunasString(clubeoba.dao.fw.TOBase t, String alias, String prename) throws Exception {
+    public static String obterColunasString(TOBase t, String alias, String prename) throws Exception {
 
         StringBuilder ret = new StringBuilder();
 
@@ -180,7 +178,7 @@ public class Helper {
         return ret.toString();
     }
 
-    public static List<Field> obterColunasSemChave(clubeoba.dao.fw.TOBase t) throws Exception {
+    public static List<Field> obterColunasSemChave(TOBase t) throws Exception {
 
         List<Field> l = new ArrayList<>();
 
@@ -195,7 +193,7 @@ public class Helper {
         return l;
     }
 
-    public static List<Field> obterColunasChave(clubeoba.dao.fw.TOBase t) throws Exception {
+    public static List<Field> obterColunasChave(TOBase t) throws Exception {
 
         List<Field> l = new ArrayList<>();
 
@@ -210,7 +208,7 @@ public class Helper {
         return l;
     }
 
-    public static List<Field> obterColunasOrdenacaoPrincipal(clubeoba.dao.fw.TOBase t) throws Exception {
+    public static List<Field> obterColunasOrdenacaoPrincipal(TOBase t) throws Exception {
 
         List<Field> l = new ArrayList<>();
 
@@ -225,7 +223,7 @@ public class Helper {
         return l;
     }
 
-    public static List<Field> obterColunasBusca(clubeoba.dao.fw.TOBase t) throws Exception {
+    public static List<Field> obterColunasBusca(TOBase t) throws Exception {
 
         List<Field> l = new ArrayList<>();
 
