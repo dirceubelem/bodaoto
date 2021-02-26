@@ -12,6 +12,8 @@ repositories {
 dependencies {
 
     implementation('org.json:json:20160810')
+    implementation('commons-configuration:commons-configuration:1.9')
+    implementation('commons-io:commons-io:2.4')
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
