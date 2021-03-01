@@ -19,8 +19,6 @@ import java.net.URLDecoder;
  */
 public class ConfigParam {
 
-    public static boolean production = true;
-
     private PropertiesConfiguration properties;
     private static ConfigParam instance;
 
@@ -35,7 +33,7 @@ public class ConfigParam {
 
     private static final String CONFIG_PATH = "%sconfig.properties";
 
-    private ConfigParam(String application) throws IOException, ConfigurationException {
+    public ConfigParam(String application) throws IOException, ConfigurationException {
 
         File file = new File(getPath(application));
         if (!file.exists()) {
@@ -71,17 +69,6 @@ public class ConfigParam {
             this.properties.setAutoSave(true);
             this.properties.load();
         }
-    }
-
-    // REDO: PropertiesConfiguration possui refresh e reload, não faz sentido recarregar o arquivo dessa forma
-    public static void renewProperties(String application) throws ConfigurationException, IOException {
-        String configParamPath = String.format(CONFIG_PATH, getPath(application));
-
-        PropertiesConfiguration properties = new PropertiesConfiguration(configParamPath);
-        properties.setAutoSave(true);
-
-        properties.load();
-        getConfigParam(application).setProperties(properties);
     }
 
     public void setProperties(PropertiesConfiguration properties) {
